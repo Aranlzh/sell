@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.aranlzh.sell.mapper.OrderDetailMapper">
+    <select id="findProcuctSaleDetailByDate" resultType="ProductSaleDetailDTO" parameterType="top.aranlzh.sell.dto.ProductSaleDetailDTO">
+        SELECT product_name , COUNT(product_name) AS count FROM order_detail WHERE create_time BETWEEN #{startTime} AND #{endTime} GROUP BY product_name ORDER BY COUNT(product_name) DESC;
+    </select>
+</mapper>

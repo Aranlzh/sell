@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.aranlzh.sell.mapper.OrderMasterMapper">
+    <select id="findPayTypeDetailByDate" resultType="PayTypeDetailDTO" parameterType="top.aranlzh.sell.dto.PayTypeDetailDTO">
+        SELECT pay_type,SUM( order_amount ) AS sum FROM order_master WHERE create_time BETWEEN #{startTime} AND #{endTime} AND order_status!=2 GROUP BY pay_type;
+   </select>
+    <select id="findTimeSaleDetailByDate" resultType="TimeSaleDetailDTO" parameterType="top.aranlzh.sell.dto.TimeSaleDetailDTO">
+        SELECT HOUR(create_time) AS hour, COUNT(*) AS count FROM order_master WHERE create_time BETWEEN #{startTime} AND #{endTime} AND order_status!=2 GROUP BY HOUR(create_time) ORDER BY HOUR(create_time);
+    </select>
+</mapper>

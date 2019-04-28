@@ -1,0 +1,42 @@
+
+web:
+  upload-path: /root/jars/static/img/
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource          # 当前数据源操作类型
+    driver-class-name: com.mysql.jdbc.Driver
+    username: aranlzh
+    password: Qwer161027.
+    url: jdbc:mysql://47.106.97.19/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://130.51.23.233/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://192.168.31.115/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  dbcp2:
+    min-idle: 5                                         # 数据库连接池的最小维持连接数
+    initial-size: 5                                     # 初始化数
+    max-total: 5                                        # 最大连接数
+    max-wait-millis: 200                                # 等待连接获取的最大超时时间
+  resources:
+    static-locations: classpath:/static/,file:${web.upload-path}
+  freemarker:
+    expose-session-attributes: true
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 1MB
+      max-request-size: 10MB
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    host: 47.106.97.19
+#    host: 130.51.23.233
+#    host: 192.168.31.115
+    port: 6379
+server:
+  context-path: /sell
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml       # mybatis配置文件所在路径
+  type-aliases-package: top.aranlzh.sell.dto
+  mapper-locations: classpath:mybatis/mapper/**/*.xml      # mapper映射文件
+debug: true
